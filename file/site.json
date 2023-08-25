@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "key": "39kan",
+    "name": "39影视",
+    "api": "https://www.39kan.com/api.php/provide/vod/at/xml",
+    "jiexiUrl": "",
+    "group": "影视",
+    "isActive": true,
+    "status": "可用",
+    "reverseOrder": false
+  },
+  {
+    "id": 2,
+    "key": "vipmv",
+    "name": "天堂资源",
+    "api": "http://vipmv.cc/api.php/provide/vod/at/xml",
+    "jiexiUrl": "https://titan.mgtv.com.o8tv.com/jiexi/?url=",
+    "group": "影视",
+    "isActive": true,
+    "status": "可用",
+    "reverseOrder": false
+  }
+]
