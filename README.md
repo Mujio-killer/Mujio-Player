@@ -2,10 +2,12 @@
 
 #### 介绍
 尝试使用vue3重写zy
-
+> 工具链：Vue3 + TypeScript + Pinia + Vite + Tauri
 #### 软件架构
-软件架构说明
-Vue3 + TypeScript + Pinia + Vite + Tauri
+#### 功能点设计
+
+
+
 
 
 #### 安装教程
