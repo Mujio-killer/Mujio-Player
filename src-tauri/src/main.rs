@@ -7,7 +7,7 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
+// use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 fn main() {
     // 配置窗口
     // 这里 `"quit".to_string()` 定义菜单项 ID，第二个参数是菜单项标签。

@@ -1,52 +1,61 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Greet from "./components/Greet.vue";
-</script>
-
 <template>
   <div class="container">
-    <h1>Welcome to Tauri!</h1>
-    <div class="row">
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo vite" alt="Vite logo" />
-      </a>
-      <a href="https://tauri.app" target="_blank">
-        <img src="/tauri.svg" class="logo tauri" alt="Tauri logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
-    </div>
-
-    <p>Click on the Tauri, Vite, and Vue logos to learn more.</p>
-
-    <p>
-      Recommended IDE setup:
-      <a href="https://code.visualstudio.com/" target="_blank">VS Code</a>
-      +
-      <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-      +
-      <a href="https://github.com/tauri-apps/tauri-vscode" target="_blank"
-        >Tauri</a
-      >
-      +
-      <a href="https://github.com/rust-lang/rust-analyzer" target="_blank"
-        >rust-analyzer</a
-      >
-    </p>
-
-    <Greet />
+    <Aside />
+    <Explorer />
+      <Play v-show="view === 'Play'" />
+      <Star v-show="view === 'Star'" />
+      <History v-show="view === 'History'" />
+      <Setting v-show="view === 'Setting'" />
   </div>
 </template>
 
-<style scoped>
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
-}
+<script setup lang="ts">
+import Aside from "./components/Aside.vue";
+import Explorer from "./components/Explorer.vue";
+import Play from "./components/Play.vue";
+import Star from "./components/Star.vue";
+import History from "./components/History.vue";
+import Setting from "./components/Setting.vue";
 
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #249b73);
-}
+import { useAppStateStore } from "./stores";
+import { computed } from "vue";
 
+
+const appState = useAppStateStore();
+const view = computed({
+  get () {
+    return appState.getView
+  },
+  set (val) {
+    appState.setView(val);
+  }
+});
+</script>
+<style lang="scss">
+@import './assets/scss/theme.scss';
+html, body, #app{
+  height: 100%;
+  border-radius: 0px;
+}
+#app {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', SimSun, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  .zy-body{
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0 20px 20px;
+  }
+}
 </style>
+
