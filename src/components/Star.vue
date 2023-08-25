@@ -1,6 +1,22 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <p>收藏</p>
+  <el-config-provider :size="size" :z-index="zIndex">
+    <app />
+  </el-config-provider>
 </template>
+
+<script>
+import { defineComponent } from 'vue'
+import { ElConfigProvider } from 'element-plus'
+
+export default defineComponent({
+  components: {
+    ElConfigProvider,
+  },
+  setup() {
+    return {
+      zIndex: 3000,
+      size: 'small',
+    }
+  },
+})
+</script>
