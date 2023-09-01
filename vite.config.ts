@@ -7,13 +7,14 @@ import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
     plugins: [
-        vue(),
+        
         AutoImport({
             resolvers: [ElementPlusResolver()],
         }),
         Components({
             resolvers: [ElementPlusResolver()],
         }),
+        vue(),
     ],
 
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`

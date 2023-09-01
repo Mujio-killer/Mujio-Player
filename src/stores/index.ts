@@ -4,7 +4,7 @@ import {defineStore} from 'pinia'
 // 这里的appState可以理解为命名空间
 export const useAppStateStore = defineStore("appState", {
     state: () => ({
-        view: 'Film',
+        view: '1',
         setting: {
             theme: 'light',
             site: 'zuidazy',

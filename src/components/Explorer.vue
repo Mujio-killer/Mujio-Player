@@ -1,13 +1,19 @@
 <template>
   <el-table
-      :data="tableData"
-      style="width: 100%"
-      :row-class-name="tableRowClassName"
+    :data="tableData"
+    style="width: 100%"
+    :row-class-name="tableRowClassName"
   >
-    <el-table-column prop="date" label="Date" width="180"/>
-    <el-table-column prop="name" label="Name" width="180"/>
-    <el-table-column prop="address" label="Address"/>
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
   </el-table>
+  <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="50"
+      class="mt-4"
+    />
 </template>
 
 <script lang="ts" setup>
@@ -18,9 +24,9 @@ interface User {
 }
 
 const tableRowClassName = ({
-                             row,
-                             rowIndex,
-                           }: {
+  row,
+  rowIndex,
+}: {
   row: User
   rowIndex: number
 }) => {
@@ -60,7 +66,6 @@ const tableData: User[] = [
 .el-table .warning-row {
   --el-table-tr-bg-color: var(--el-color-warning-light-9);
 }
-
 .el-table .success-row {
   --el-table-tr-bg-color: var(--el-color-success-light-9);
 }

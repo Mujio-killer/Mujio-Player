@@ -1,11 +1,20 @@
 <template>
-  <div class="container">
-    <Aside/>
-    <Explorer/>
-    <Play/>
-    <Star/>
-    <History/>
-    <Setting/>
+  <div class="common-layout">
+    <el-container>
+      <el-header>mujio</el-header>
+      <el-container>
+        <el-aside>
+          <Aside />
+        </el-aside>
+        <el-main>
+          <Explorer v-if="needShow('1')"/>
+          <Play v-if="needShow('2')" />
+          <Star v-if="needShow('3')"/>
+          <History v-if="needShow('4')"/>
+          <Setting v-if="needShow('5')"/>
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
@@ -18,18 +27,14 @@ import History from "./components/History.vue";
 import Setting from "./components/Setting.vue";
 
 import {useAppStateStore} from "./stores";
-import {computed} from "vue";
 
 
 const appState = useAppStateStore();
-const view = computed({
-  get() {
-    return appState.getView
-  },
-  set(val) {
-    appState.setView(val);
-  }
-});
+
+const needShow = (idx:string) => {
+  return appState.getView == idx;
+}
+
 </script>
 <style lang="scss">
 html, body, #app {
