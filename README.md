@@ -9,7 +9,6 @@
 
 
 
-
 #### 安装教程
 
 1.  xxxx
@@ -38,3 +37,10 @@
 4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
 5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
 6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+#### commit log
+
+2023-09-01 尝试rust读写sqlite； 读取db文件失败解决方案：
+1.  改依赖为bundled；
+2.  检查文件路径
+3.  修改文件夹读写权限(修改db文件依然报错，修改file文件夹并递归设为777后修复- chmod -R 777 file)
