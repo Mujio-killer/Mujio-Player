@@ -1,4 +1,42 @@
 <template>
+  <el-select v-model="value" filterable placeholder="资源">
+    <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+    />
+  </el-select>
+  <el-select v-model="value" filterable placeholder="类型">
+    <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+    />
+  </el-select>
+
+  <el-date-picker
+      v-model="value2"
+      type="year"
+      start-placeholder="上映时间start"
+      end-placeholder="上映时间end"
+      :default-time="defaultTime2"
+  />
+  <el-select v-model="value" filterable placeholder="站点">
+    <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+    />
+  </el-select>
+  <el-input
+      v-model="input2"
+      class="w-50 m-2"
+      placeholder="Please Input"
+      :suffix-icon="Search"
+  />
   <el-table
     :data="tableData"
     style="width: 100%"

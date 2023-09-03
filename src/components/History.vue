@@ -8,6 +8,12 @@
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column prop="address" label="Address" />
   </el-table>
+  <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="50"
+      class="mt-4"
+  />
 </template>
 
 <script lang="ts" setup>
