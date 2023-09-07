@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="5.1">
+    <list page="1" pagecount="8292" pagesize="20" recordcount="165831">
+        <video>
+            <last>2023-09-07 12:32:30</last>
+            <id>165401</id>
+            <tid>16</tid>
+            <name>
+                <![CDATA[外星也难民 第四季]]>
+            </name>
+            <type>欧美剧</type>
+            <dt>hnm3u8</dt>
+            <note>
+                <![CDATA[第11集]]>
+            </note>
+        </video>
+    </list>
+    <class>
+        <ty id="1">电影</ty>
+        <ty id="2">电视</ty>
+        <ty id="3">综艺</ty>
+        <ty id="4">动漫</ty>
+        <ty id="6">动作片</ty>
+        <ty id="7">喜剧片</ty>
+        <ty id="8">爱情片</ty>
+        <ty id="9">科幻片</ty>
+        <ty id="10">恐怖片</ty>
+        <ty id="11">剧情片</ty>
+        <ty id="12">战争片</ty>
+        <ty id="13">国产剧</ty>
+        <ty id="14">港台剧</ty>
+        <ty id="15">日韩剧</ty>
+        <ty id="16">欧美剧</ty>
+    </class>
+</rss>
