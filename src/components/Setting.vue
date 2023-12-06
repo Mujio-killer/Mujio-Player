@@ -1,66 +1,45 @@
 <template>
-  <el-table
-    :data="tableData"
-    style="width: 100%"
-    :row-class-name="tableRowClassName"
-  >
-    <el-table-column prop="date" label="Date" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
-  </el-table>
+  <div class="settings">
+    <el-table
+        :data="appState.siteInfo"
+        style="width: 100%">
+      <el-table-column prop="name" label="播放源名称"></el-table-column>
+      <el-table-column prop="group" label="视频"></el-table-column>
+      <el-table-column prop="isActive" label="启用"></el-table-column>
+      <el-table-column prop="status" label="可用"></el-table-column>
+      <el-table-column
+          label="操作">
+        <template #default="{ row }">
+          <el-button
+              type="danger"
+              size="mini"
+              @click="deletePlaySource(row)">
+            删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-button
+        type="primary"
+        @click="addPlaySource">
+      添加播放源
+    </el-button>
+  </div>
 </template>
 
-<script lang="ts" setup>
-interface User {
-  date: string
-  name: string
-  address: string
-}
+<script setup lang="ts">
+import {useAppStateStore} from "../stores";
 
-const tableRowClassName = ({
-  row,
-  rowIndex,
-}: {
-  row: User
-  rowIndex: number
-}) => {
-  if (rowIndex === 1) {
-    return 'warning-row'
-  } else if (rowIndex === 3) {
-    return 'success-row'
+const appState = useAppStateStore();
+
+const addPlaySource = () => {
+  // 弹出对话框或跳转到添加播放源页面
+}
+const deletePlaySource = (row) => {
+  // 从playSources数组中删除指定的播放源
+  const index = this.playSources.indexOf(row);
+  if (index !== -1) {
+    this.playSources.splice(index, 1);
   }
-  return ''
 }
-
-const tableData: User[] = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-]
 </script>
-
-<style>
-.el-table .warning-row {
-  --el-table-tr-bg-color: var(--el-color-warning-light-9);
-}
-.el-table .success-row {
-  --el-table-tr-bg-color: var(--el-color-success-light-9);
-}
-</style>

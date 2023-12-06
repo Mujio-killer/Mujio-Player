@@ -1,2 +1,2 @@
 
-pub mod site_info;
+pub mod movie;

@@ -1,82 +1,67 @@
-import {defineStore} from 'pinia'
+import {defineStore} from 'pinia';
 
-// 存放共享变量，记录当前状态等
-// 这里的appState可以理解为命名空间
 export const useAppStateStore = defineStore("appState", {
     state: () => ({
         view: '1',
-        setting: {
-            theme: 'light',
-            site: 'zuidazy',
-            view: 'picture',
-            shortcut: true
+        siteInfo: [] as Array<any>, // 明确指定siteInfo为数组类型
+        searchResults: [] as Array<any>, // 明确指定siteInfo为数组类型
+        selectedVideoSrc: [] as Array<any>, // 明确指定siteInfo为数组类型
+        selectedEpisode: {
+            type: "mp4",
+            episode: "暂无资源",
+            link: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4",
+            currentTime: 0,
+            currentVolume: 0.7,
+        }, // 明确指定siteInfo为数组类型
+        plyrPlayer: {
+            captions: { active: true, update: true, language: 'auto' },
+            controls: [
+                'play-large',// 播放图标
+                'rewind',// 后退
+                'play',// 播放
+                'fast-forward',
+                'progress',
+                'current-time',
+                'duration',
+                'mute',// 静音
+                'volume',
+                'settings',
+                'pip',
+                'fullscreen',
+            ],
+            i18n: {
+                speed: '速度',
+                normal: '正常',
+            },
+            autoplay: false,
+            seekTime: 1,
+            ratio: '16:9',
         },
-        detail: {
-            show: false,
-            key: '',
-            info: {}
-        },
-        share: {
-            show: false,
-            key: '',
-            info: {}
-        },
-        video: {
-            key: '',
-            info: {}
-        },
-        winState: {
-            windowIsOnTop: false
-        },
-        detailCache: {},
-    }),
+        playHistoryData: [] as Array<any>
 
+    }),
     getters: {
         getView(state): string {
-            return state.view
-        },
-        getSetting(state): any {
-            return state.setting
-        },
-        getDetail(state): any {
-            return state.detail
-        },
-        getShare(state): any {
-            return state.share
-        },
-        getVideo(state): any {
-            return state.video
-        },
-        getAppState(state): any {
-            return state.winState
-        },
-        getDetailCache(state): any {
-            return state.detailCache
+            return state.view.toString(); // 确保返回一个字符串
         }
     },
     actions: {
         setView(payload: string) {
-            this.view = payload
+            this.view = payload; // 设置view的值
         },
-        setSetting(payload: any) {
-            this.setting = payload
+        setSiteInfo(payload: Array<any>) {
+            this.siteInfo = payload; // 设置siteInfo的值
         },
-        setDetail(payload: any) {
-            this.detail = payload
+        setSearchResults(payload: Array<any>) {
+            this.searchResults = payload; // 设置searchResults的值
         },
-        setShare(payload: any) {
-            this.share = payload
+        setSelectedEpisode(payload: any) {
+            this.selectedEpisode = payload;
         },
-        setVideo(payload: any) {
-            this.video = payload
-        },
-        setWinState(payload: any) {
-            this.winState = payload
-        },
-        setDetailCache(payload: any) {
-            this.detailCache = payload
+        setSelectedVideoSrc(payload: any) {
+            this.selectedVideoSrc = payload;
         }
     }
 
-})
 
+});

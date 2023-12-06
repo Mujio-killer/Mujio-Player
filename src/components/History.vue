@@ -1,72 +1,31 @@
 <template>
-  <el-table
-    :data="tableData"
-    style="width: 100%"
-    :row-class-name="tableRowClassName"
-  >
-    <el-table-column prop="date" label="Date" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
+  <el-table v-if="playHistoryData.length > 0" :data="playHistoryData" >
+    <el-table-column prop="date" label="观看时间" width="180" />
+    <el-table-column prop="site" label="来源" width="180" />
+    <el-table-column prop="name" label="名称" width="180" />
+    <el-table-column prop="address" label="链接" />
   </el-table>
-  <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="50"
-      class="mt-4"
-  />
+  <el-empty v-else :image-size="200" image="https://forthebadge.com/images/featured/featured-fuck-it-ship-it.svg" />
 </template>
 
 <script lang="ts" setup>
-interface User {
-  date: string
-  name: string
-  address: string
-}
+import {onMounted, ref} from 'vue';
+import {invoke} from '@tauri-apps/api/tauri';
+import {useAppStateStore} from "../stores";
 
-const tableRowClassName = ({
-  row,
-  rowIndex,
-}: {
-  row: User
-  rowIndex: number
-}) => {
-  if (rowIndex === 1) {
-    return 'warning-row'
-  } else if (rowIndex === 3) {
-    return 'success-row'
+const appState = useAppStateStore();
+const playHistoryData = ref([]);
+
+onMounted(async () => {
+  let appHistoryData = appState.playHistoryData;
+  if (appHistoryData.length == 0) {
+    appHistoryData = await invoke('read_json_file', {filePath: "../dist/history.json"});
   }
-  return ''
-}
+  playHistoryData.value = appHistoryData;
+});
 
-const tableData: User[] = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-]
+
 </script>
 
 <style>
-.el-table .warning-row {
-  --el-table-tr-bg-color: var(--el-color-warning-light-9);
-}
-.el-table .success-row {
-  --el-table-tr-bg-color: var(--el-color-success-light-9);
-}
 </style>
