@@ -1,5 +1,5 @@
 <template>
-  <div class="common-layout">
+  <div id="app" class="common-layout">
     <el-container class="app-media">
       <el-aside class="media-side">
         <Aside/>
@@ -40,6 +40,7 @@ const needShow = (idx: string) => {
 <style lang="scss">
 html, body, #app {
   //border-radius: 10px;
+  position: relative;
   height: 100%;
   width: 100%;
   margin: 0;

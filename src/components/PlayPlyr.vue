@@ -6,9 +6,8 @@
       <source :src="appState.selectedEpisode.link" type="video/m3u8" />
     </video>
 
-    <div v-if="showPlaylist" class="custom-playlist">
-      <PlayList/>
-    </div>
+    <el-button type="primary" @click="show">选集</el-button>
+    <PlayList v-model="showPalyList"/>
   </div>
 </template>
 
@@ -23,7 +22,7 @@ const appState = useAppStateStore();
 const selectedEpisode = appState.selectedEpisode;
 
 const player = ref(null);
-const showPlaylist = ref(true);
+const showPalyList = ref(false);
 
 onMounted(() => {
    player.value = new Plyr('#player', appState.plyrPlayer);
@@ -33,7 +32,9 @@ onMounted(() => {
   // 添加鼠标移动事件监听器
 });
 
-
+const show = () => {
+  showPalyList.value = !showPalyList.value;
+}
 </script>
 
 <style scoped>
