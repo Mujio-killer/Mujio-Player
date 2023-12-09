@@ -5,13 +5,16 @@ export const useAppStateStore = defineStore("appState", {
         view: '1',
         siteInfo: [] as Array<any>, // 明确指定siteInfo为数组类型
         searchResults: [] as Array<any>, // 明确指定siteInfo为数组类型
-        selectedVideoSrc: [] as Array<any>, // 明确指定siteInfo为数组类型
         selectedEpisode: {
             type: "mp4",
-            episode: "暂无资源",
-            link: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4",
+            episode: {
+                episode: "demo",
+                link: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4",
+            },
             currentTime: 0,
             currentVolume: 0.7,
+            srcName: "测试",
+            episodes:[] as Array<any>
         }, // 明确指定siteInfo为数组类型
         plyrPlayer: {
             captions: { active: true, update: true, language: 'auto' },
@@ -35,7 +38,7 @@ export const useAppStateStore = defineStore("appState", {
             },
             autoplay: false,
             seekTime: 1,
-            ratio: '16:9',
+            // ratio: '16:9',
         },
         playHistoryData: [] as Array<any>
 

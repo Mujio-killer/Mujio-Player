@@ -1,14 +1,22 @@
 <template>
-  <div>
-    <video id="player" playsinline
-           data-poster="https://forthebadge.com/images/featured/featured-fuck-it-ship-it.svg">
-      <source :src="appState.selectedEpisode.link" type="video/mp4" />
-      <source :src="appState.selectedEpisode.link" type="video/m3u8" />
-    </video>
+  <el-card class="box-card">
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          <b>正在播放：</b>【{{ selectedEpisode.srcName }}】{{selectedEpisode.episode.episode}}<el-icon><ArrowDownBold /></el-icon>
+        </span>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item v-for="item in selectedEpisode.episodes" @change="onChange">{{ item.episode }}</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+      <video id="player" controls
+             data-poster="https://forthebadge.com/images/featured/featured-fuck-it-ship-it.svg">
+        <source :src="appState.selectedEpisode.link" type="video/mp4" />
+        <source :src="appState.selectedEpisode.link" type="video/m3u8" />
+      </video>
+  </el-card>
 
-    <el-button type="primary" @click="show">选集</el-button>
-    <PlayList v-model="showPalyList"/>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -16,13 +24,12 @@ import { onMounted, ref } from 'vue';
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
 import { useAppStateStore } from "../stores";
-import PlayList from './PlayList.vue';
+import { ArrowDownBold } from '@element-plus/icons-vue';
 
 const appState = useAppStateStore();
 const selectedEpisode = appState.selectedEpisode;
 
 const player = ref(null);
-const showPalyList = ref(false);
 
 onMounted(() => {
    player.value = new Plyr('#player', appState.plyrPlayer);
@@ -32,13 +39,35 @@ onMounted(() => {
   // 添加鼠标移动事件监听器
 });
 
-const show = () => {
-  showPalyList.value = !showPalyList.value;
+const onChange = (status: boolean) => {
+
 }
+// 播放内容
+selectedEpisode.link
 </script>
 
 <style scoped>
-.custom-playlist {
-  background: #d7b9b9;
+.box-card {
+  width: 100%;
+  height: 100%;
 }
+
+#player {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /*flex: 1;*/
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #8798aa;
+}
+
+.el-dropdown-link:hover {
+  cursor: pointer;
+  color: #2986e7;
+}
+
+
 </style>

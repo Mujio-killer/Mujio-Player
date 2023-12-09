@@ -11,11 +11,8 @@ import { ref } from 'vue';
 import { useAppStateStore } from "../stores";
 
 const appState = useAppStateStore();
-// const playList = appState.selectedVideoSrc;
-const playList = [
-    {episode: "第1集", link: "test"},
-    {episode: "第2集", link: "test"},
-];
+const playList = appState.selectedVideoSrc;
+
 const drawer = ref(true);
 
 const checked = ref(false)

@@ -12,9 +12,11 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "@tauri-apps/api": "^1.4.0",
+    "axios": "^1.6.2",
     "core-js": "^3.32.1",
     "dplayer": "^1.27.1",
     "element-plus": "^2.3.12",
+    "fast-xml-parser": "^4.3.2",
     "hls.js": "^1.4.12",
     "pinia": "^2.1.6",
     "plyr": "^3.7.8",

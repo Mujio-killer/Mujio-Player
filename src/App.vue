@@ -40,7 +40,9 @@ const needShow = (idx: string) => {
 <style lang="scss">
 html, body, #app {
   //border-radius: 10px;
-  position: relative;
+  position: absolute;
+  display: flex;
+  flex: 1;
   height: 100%;
   width: 100%;
   margin: 0;
@@ -60,7 +62,6 @@ html, body, #app {
   background: #ffffff;
   padding-top: 20%;
 }
-
 
 .media-content {
   background: #e9eae9;

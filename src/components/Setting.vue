@@ -37,9 +37,9 @@ const addPlaySource = () => {
 }
 const deletePlaySource = (row) => {
   // 从playSources数组中删除指定的播放源
-  const index = this.playSources.indexOf(row);
-  if (index !== -1) {
-    this.playSources.splice(index, 1);
-  }
+  // const index = playSources.indexOf(row);
+  // if (index !== -1) {
+  //   playSources.splice(index, 1);
+  // }
 }
 </script>

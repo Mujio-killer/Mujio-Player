@@ -5,9 +5,11 @@ specifiers:
   '@tauri-apps/api': ^1.4.0
   '@tauri-apps/cli': ^1.4.0
   '@vitejs/plugin-vue': ^4.2.3
+  axios: ^1.6.2
   core-js: ^3.32.1
   dplayer: ^1.27.1
   element-plus: ^2.3.12
+  fast-xml-parser: ^4.3.2
   hls.js: ^1.4.12
   less: ^4.2.0
   pinia: ^2.1.6
@@ -27,9 +29,11 @@ specifiers:
 dependencies:
   '@element-plus/icons-vue': registry.npmmirror.com/@element-plus/icons-vue/2.3.1_vue@3.3.9
   '@tauri-apps/api': registry.npmmirror.com/@tauri-apps/api/1.5.1
+  axios: 1.6.2
   core-js: registry.npmmirror.com/core-js/3.33.3
   dplayer: 1.27.1
   element-plus: registry.npmmirror.com/element-plus/2.4.3_vue@3.3.9
+  fast-xml-parser: 4.3.2
   hls.js: 1.4.12
   pinia: registry.npmmirror.com/pinia/2.1.7_typescript@5.3.2+vue@3.3.9
   plyr: 3.7.8
@@ -381,6 +385,16 @@ packages:
       - debug
     dev: false
 
+  /axios/1.6.2:
+    resolution: {integrity: sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==}
+    dependencies:
+      follow-redirects: 1.15.3
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /babel-helper-vue-jsx-merge-props/2.0.3:
     resolution: {integrity: sha512-gsLiKK7Qrb7zYJNgiXKpXblxbV5ffSwR0f5whkPAaBAR4fhi6bwRZxX9wBlIc5M/v8CCkXUbXZL4N/nSE97cqg==}
     dev: false
@@ -479,6 +493,13 @@ packages:
     dependencies:
       prr: 1.0.1
     optional: true
+
+  /fast-xml-parser/4.3.2:
+    resolution: {integrity: sha512-rmrXUXwbJedoXkStenj1kkljNF7ugn5ZjR9FJcwmCfcCbtOMDghPajbc+Tck6vE6F5XsDmx+Pr2le9fw8+pXBg==}
+    hasBin: true
+    dependencies:
+      strnum: 1.0.5
+    dev: false
 
   /follow-redirects/1.15.3:
     resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
@@ -688,6 +709,10 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
     requiresBuild: true
+
+  /strnum/1.0.5:
+    resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
+    dev: false
 
   /throttle-debounce/1.1.0:
     resolution: {integrity: sha512-XH8UiPCQcWNuk2LYePibW/4qL97+ZQ1AN3FNXwZRBNPPowo/NRU5fAlDCSNBJIYCKbioZfuYtMhG4quqoJhVzg==}
