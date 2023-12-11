@@ -7,14 +7,17 @@ export const useAppStateStore = defineStore("appState", {
         searchResults: [] as Array<any>, // 明确指定siteInfo为数组类型
         selectedEpisode: {
             type: "mp4",
-            episode: {
-                episode: "demo",
-                link: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4",
-            },
+            name: "demo",
+            url: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4",
             currentTime: 0,
             currentVolume: 0.7,
-            srcName: "测试",
-            episodes:[] as Array<any>
+            currentEpisode: "第一集",
+            siteName: "测试网址",
+            // episodes:[] as Array<any>
+            episodes:[{
+                name: "demo",
+                link: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
+            }]
         }, // 明确指定siteInfo为数组类型
         plyrPlayer: {
             captions: { active: true, update: true, language: 'auto' },
@@ -38,7 +41,7 @@ export const useAppStateStore = defineStore("appState", {
             },
             autoplay: false,
             seekTime: 1,
-            // ratio: '16:9',
+            ratio: null
         },
         playHistoryData: [] as Array<any>
 

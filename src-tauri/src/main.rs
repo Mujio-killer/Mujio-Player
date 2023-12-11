@@ -51,9 +51,9 @@ fn search_by_site(site: String, keyword: String) -> Vec<Movie> {
             for part in parts {
                 let sub_parts: Vec<&str> = part.split("$").collect();
                 if sub_parts.len() == 2 {
-                    let episode = sub_parts[0].to_string();
+                    let name = sub_parts[0].to_string();
                     let link = sub_parts[1].to_string();
-                    episodes.push(Episode { episode, link });
+                    episodes.push(Episode { name, link });
                 }
             }
             video_source.push(VideoSource { flag, episodes });

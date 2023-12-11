@@ -38,7 +38,9 @@ const appState = useAppStateStore();
 const changeView = (idx: string) => {
   appState.view = idx;
 }
+
 </script>
+
 <style>
 .el-menu-vertical-demo .el-menu-item.is-active {
   background: #e8e9e8;

@@ -30,7 +30,7 @@ pub struct VideoSource {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Episode {
     // 集数
-    pub episode: String,
+    pub name: String,
     // 链接
     pub link: String,
 }
