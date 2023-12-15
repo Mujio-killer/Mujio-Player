@@ -16,6 +16,13 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "http": {
+        "all": true,
+        "scope": [
+          "http://**",
+          "https://**"
+        ]
       }
     },
     "bundle": {
@@ -35,7 +42,7 @@
     },
     "windows": [
       {
-        "fullscreen": false,
+        "fullscreen": true,
         "resizable": true,
         "title": "Mujio-Player",
         "width": 800,

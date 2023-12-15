@@ -1,3 +1,4 @@
+<!--
 <template>
   <el-table v-if="playHistoryData.length > 0" :data="playHistoryData" >
     <el-table-column prop="date" label="观看时间" width="180" />
@@ -29,3 +30,4 @@ onMounted(async () => {
 
 <style>
 </style>
+-->

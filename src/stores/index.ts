@@ -1,47 +1,33 @@
 import {defineStore} from 'pinia';
+import {getSiteInfo} from "../utils/SiteInfoUtil";
+import {Dd, Episode, QueryOptions, SiteInfo, VideoInfo, VideoResource} from "../utils/types";
 
 export const useAppStateStore = defineStore("appState", {
     state: () => ({
         view: '1',
-        siteInfo: [] as Array<any>, // 明确指定siteInfo为数组类型
-        searchResults: [] as Array<any>, // 明确指定siteInfo为数组类型
-        selectedEpisode: {
-            type: "mp4",
-            name: "demo",
-            url: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4",
+        queryOption: {
+            api: '',
+            ct: 1,
+            ids: 0,
+            pg: 1,
+            ps: 20,
+            t: '',
+            wd: '',
+        } as QueryOptions,
+        siteList: [] as SiteInfo[],
+        selectedSite: {} as SiteInfo,
+        searchResult: {
+            list: []
+        } as VideoResource,
+        currentSrc: {
+            site: {} as SiteInfo,// 站点信息
+            dd: {} as Dd,// 当前选择的资源
+            episode: {} as Episode,// 当前播放的剧集
+            name: "",// 当前资源名称
+        },
+        playerState: {
             currentTime: 0,
-            currentVolume: 0.7,
-            currentEpisode: "第一集",
-            siteName: "测试网址",
-            // episodes:[] as Array<any>
-            episodes:[{
-                name: "demo",
-                link: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-            }]
-        }, // 明确指定siteInfo为数组类型
-        plyrPlayer: {
-            captions: { active: true, update: true, language: 'auto' },
-            controls: [
-                'play-large',// 播放图标
-                'rewind',// 后退
-                'play',// 播放
-                'fast-forward',
-                'progress',
-                'current-time',
-                'duration',
-                'mute',// 静音
-                'volume',
-                'settings',
-                'pip',
-                'fullscreen',
-            ],
-            i18n: {
-                speed: '速度',
-                normal: '正常',
-            },
-            autoplay: false,
-            seekTime: 1,
-            ratio: null
+            currentVolume: 0.7
         },
         playHistoryData: [] as Array<any>
 
@@ -52,22 +38,12 @@ export const useAppStateStore = defineStore("appState", {
         }
     },
     actions: {
-        setView(payload: string) {
-            this.view = payload; // 设置view的值
+        async initializeGlobalVariable() {
+            // 在这里进行全局变量的初始化
+            this.siteList = await getSiteInfo();
+            this.queryOption.api = this.siteList[0].api;
         },
-        setSiteInfo(payload: Array<any>) {
-            this.siteInfo = payload; // 设置siteInfo的值
-        },
-        setSearchResults(payload: Array<any>) {
-            this.searchResults = payload; // 设置searchResults的值
-        },
-        setSelectedEpisode(payload: any) {
-            this.selectedEpisode = payload;
-        },
-        setSelectedVideoSrc(payload: any) {
-            this.selectedVideoSrc = payload;
-        }
-    }
+    },
 
 
 });

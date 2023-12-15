@@ -1,20 +1,21 @@
 <template>
   <div class="explorer-container">
-    <el-form :data="searchForm" inline status-icon style="height: 6%; display: block">
+    <el-form inline status-icon style="height: 6%; display: block">
       <div class="form-row">
         <el-form-item label="站点" class="form-item">
-          <el-select v-model="searchForm.site" value-key="id" placeholder="请选择站点" clearable placement="bottom">
-            <el-option label="全站" value="all"/>
+          <el-select v-model="queryOptions.api" value-key="id" placeholder="请选择站点"
+                     default-first-option
+                     clearable placement="bottom"
+          >
             <el-option
-                v-for="item in siteInfo"
-                :key="item.id"
+                v-for="item in appState.siteList"
                 :label="item.name"
-                :value="item"
+                :value="item.api"
             />
           </el-select>
         </el-form-item>
         <el-form-item label="关键词" class="form-item">
-          <el-input v-model="searchForm.keyword" placeholder="请输入关键词"></el-input>
+          <el-input v-model="queryOptions.wd" placeholder="请输入关键词"></el-input>
         </el-form-item>
 
         <el-form-item class="form-item">
@@ -23,44 +24,46 @@
       </div>
     </el-form>
 
-    <el-table :data="appState.searchResults"
-              v-if="appState.searchResults.length > 0"
+    <el-table :data="searchResult.list"
               :default-sort="{ prop: 'name', order: 'descending' }"
               highlight-current-row
               style="line-height: 60px; width: 100%; border: 0; overflow: auto; margin-top: 20px "
               height="95%"
-              table-layout="fixed"
-    >
+              table-layout="fixed">
       <!-- 行展开展示详情 -->
       <el-table-column type="expand">
         <template #default="props">
 
-          <div style="margin-left: 5%; margin-right: 5%; border: 0">
+          <div style="margin-left: 15px; margin-right: 15px; border: 0">
             <el-card class="box-card">
-              <el-row :gutter="12" style="border: #e8e9e8 1px solid">
-                <el-col :span="8">
-                    <el-image style="width: 200px" :src="props.row.pic"/>
-                </el-col>
-                <el-col :span="16">
+              <div style="display: flex">
+                <div>
+                  <img :src="props.row.pic" class="image" style="width: 200px; height: 300px"/>
+                </div>
+                <div style="margin-left: 20px">
+                  <span>
                     <p><b>名称:  </b>{{ props.row.name }}</p>
                     <p><b>类型:  </b>{{ props.row.type_str }}</p>
                     <p><b>导演:  </b>{{ props.row.director }}</p>
                     <p><b>主演:  </b>{{ props.row.actor }}</p>
-                </el-col>
-              </el-row>
-              <span><b>简介:  </b></span>
-              <span><p v-html="props.row.desc"/></span>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <span><p><b>简介:  </b></p><p v-html="props.row.desc"/></span>
+              </div>
 
               <div>
-                <h3>播放资源</h3>
+                <span><h3>播放资源</h3></span>
 
-                <el-tabs type="border-card">
+                <el-tabs type="border-card" style="margin-top: 10px">
                   <!-- 分资源类型展示 -->
-                  <el-tab-pane v-for="videoSrc in props.row.video_source" :key="videoSrc.flag" :label="videoSrc.flag">
-                    <el-radio-group v-model="selectedEpisode">
-                      <el-radio-button v-for="videoEpisode in videoSrc.episodes" :key="videoEpisode.link"
-                                       :label="videoEpisode.name" border @click="playVideo(props.row.name, videoSrc, videoEpisode)">
-                        {{ videoEpisode.name }}
+                  <el-tab-pane v-for="dd in props.row.dl" :key="dd.flag" :label="dd.flag">
+                    <el-radio-group v-model="appState.currentSrc.dd.flag">
+                      <el-radio-button v-for="episode in dd.list" :key="episode.link"
+                                       :label="episode.name" border
+                                       @click="playVideo(props.row.name, dd, episode)">
+                        {{ episode.name }}
                       </el-radio-button>
                     </el-radio-group>
                   </el-tab-pane>
@@ -78,78 +81,49 @@
       <el-table-column sortable prop="year" label="上映时间"></el-table-column>
       <el-table-column prop="note" label="备注"></el-table-column>
     </el-table>
-
-    <div v-else>
-      <el-empty description="暂无搜索结果"/>
-    </div>
   </div>
+
 </template>
 
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
-import {invoke} from '@tauri-apps/api/tauri';
 import {useAppStateStore} from "../stores";
+import {Dd, Episode} from "../utils/types";
+import {doSearch} from "../utils/SiteUtil";
 
 const appState = useAppStateStore();
 
-/**
- * 获取站点信息
- */
-const siteInfo = ref([]);
-// 更新站点信息
-onMounted(async () => {
-  let allSite = appState.siteInfo;
-  if (allSite == undefined || allSite.length == 0) {
-    await invoke('read_json_file', {filePath: "../dist/resource.json"})
-        .then((resp) => {
-          allSite = resp.filter(item => item.isActive && item.status == '可用');
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-  }
-  siteInfo.value = allSite;
-  appState.setSiteInfo(allSite);
+// 查询参数
+const queryOptions = ref(appState.queryOption);
+// 查询结果
+const searchResult = ref(appState.searchResult);
+// 分类信息
+
+onMounted(() => {
+  search();
 });
 
-/**
- * 搜索资源
- */
-const searchForm = ref({
-  // 站点
-  site: {
-    id: 0,
-    name: 'all',
-    api:  ""
-  },
-  // 关键词
-  keyword: '',
-});
+const search = () => {
+     doSearch(queryOptions.value).then(res=> {
+      searchResult.value = res;
+    }).catch (err=>{
+      console.error('搜索出现错误：', err);
 
-const search = async () => {
-  appState.searchResults = await invoke('search_by_site', {
-    site: searchForm.value.site.api,
-    keyword: searchForm.value.keyword
-  });
-};
+    });
+}
 
 // 动态设置选中的资源
 const toggleExpand = (row: any) => {
   row.expanded = !row.expanded;
 };
 
-const selectedEpisode = ref();
 // 播放选中的资源
-const playVideo = (name: String, videoSrc: any, episode: any) => {
-  appState.selectedEpisode.type = videoSrc.flag;
-  appState.selectedEpisode.episodes = videoSrc.episodes;
-  appState.selectedEpisode.name = name;
-  appState.selectedEpisode.currentEpisode = episode.name;
-  appState.selectedEpisode.url = episode.link;
+const playVideo = (name: string, dd: Dd, episode: Episode) => {
+  appState.currentSrc.name = name;
+  appState.currentSrc.dd = dd;
+  appState.currentSrc.episode = episode;
+  appState.currentSrc.site = appState.selectedSite;
 
-  console.log(searchForm.value.site)
-  console.log(searchForm.value.site.name)
-  appState.selectedEpisode.siteName = searchForm.value.site.name;
   appState.view = '2';
 }
 
@@ -165,17 +139,6 @@ const playVideo = (name: String, videoSrc: any, episode: any) => {
 .form-item {
   flex: 1;
   margin-right: 10px;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.el-card {
-  height: 100%; /* 设置卡片高度为100% */
-  position: relative;
 }
 
 .el-image {

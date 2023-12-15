@@ -16,21 +16,22 @@
         <VideoPlay/>
       </el-icon>
     </el-menu-item>
-    <el-menu-item index="3">
-      <el-icon size="25">
-        <Clock/>
-      </el-icon>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon size="25">
-        <Setting/>
-      </el-icon>
-    </el-menu-item>
+    <!--    <el-menu-item index="3">
+          <el-icon size="25">
+            <Clock/>
+          </el-icon>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <el-icon size="25">
+            <Setting/>
+          </el-icon>
+        </el-menu-item>-->
   </el-menu>
 </template>
 
 <script lang="ts" setup>
-import {Clock, Search, Setting, VideoPlay} from '@element-plus/icons-vue'
+// import {Clock, Search, Setting, VideoPlay} from '@/**/element-plus/icons-vue'
+import {Search, VideoPlay} from '@element-plus/icons-vue'
 import {useAppStateStore} from "./../stores";
 
 const appState = useAppStateStore();
@@ -45,6 +46,7 @@ const changeView = (idx: string) => {
 .el-menu-vertical-demo .el-menu-item.is-active {
   background: #e8e9e8;
 }
+
 .el-menu-vertical-demo {
   display: flex;
   flex-direction: column;

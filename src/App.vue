@@ -9,11 +9,12 @@
           <Explorer class="media-content media-content-explorer" v-if="needShow('1')"/>
         </KeepAlive>
         <KeepAlive>
-          <PlayPlyr style="width: 100%; height: 100%" class="media-content media-content-playPlyr" v-if="needShow('2')"/>
+          <PlayPlyr style="width: 100%; height: 100%" class="media-content media-content-playPlyr"
+                    v-if="needShow('2')"/>
         </KeepAlive>
 
-        <History style="width: 100%; height: 100%" class="media-content media-content-history" v-if="needShow('3')"/>
-        <Setting class="media-content media-content-setting" v-if="needShow('4')"/>
+        <!--        <History style="width: 100%; height: 100%" class="media-content media-content-history" v-if="needShow('3')"/>-->
+        <!--        <Setting class="media-content media-content-setting" v-if="needShow('4')"/>-->
       </el-main>
     </el-container>
   </div>
@@ -22,8 +23,6 @@
 <script setup lang="ts">
 import Aside from "./components/Aside.vue";
 import Explorer from "./components/Explorer.vue";
-import History from "./components/History.vue";
-import Setting from "./components/Setting.vue";
 import PlayPlyr from "./components/PlayPlyr.vue";
 
 import {useAppStateStore} from "./stores";

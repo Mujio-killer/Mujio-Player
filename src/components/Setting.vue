@@ -1,3 +1,4 @@
+<!--
 <template>
   <div class="settings">
     <el-table
@@ -42,4 +43,4 @@ const deletePlaySource = (row) => {
   //   playSources.splice(index, 1);
   // }
 }
-</script>
+</script>-->
