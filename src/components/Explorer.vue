@@ -142,9 +142,8 @@ const playVideo = (name: string, dd: Dd, episode: Episode) => {
   appState.view = '2';
 }
 
-const changeSite = (selectedLabel: string) => {
-  appState.selectedSite.value = selectedLabel;
-  queryOptions.pg = 1;
+const changeSite = () => {
+  queryOptions.value.pg = 1;
   search();
 }
 const pageChange = (page: number) => {
