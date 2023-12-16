@@ -1,0 +1,35 @@
+name: Build and Package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-package:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Tauri CLI
+      run: npm install -g tauri
+
+    - name: Build for Windows
+      run: tauri build --target windows
+
+    - name: Build for macOS
+      run: tauri build --target mac
+
+    - name: Build for Linux
+      run: tauri build --target linux
+
+    - name: Build for iOS
+      run: tauri build --target ios
+
+    - name: Build for Android
+      run: tauri build --target android
