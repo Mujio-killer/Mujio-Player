@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Mujio-Player",
-    "version": "0.0.0"
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -28,6 +28,9 @@
     "bundle": {
       "active": true,
       "targets": "all",
+      "category": "player",
+      "shortDescription": "a simple player write with tauri",
+      "longDescription": "This is a video player write with Vue3 and rust;",
       "identifier": "com.tauri.test",
       "icon": [
         "icons/32x32.png",
