@@ -6,7 +6,7 @@ import {ClassInfo, Dd, Episode, QueryOptions, VideoInfo, VideoResource} from './
  * @param siteApi
  */
 export async function getSiteClass(siteApi: string): Promise<ClassInfo[]> {
-    const xmlData = await fetchRss(siteApi);
+    const xmlData: string = await fetchRss(siteApi);
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
 
@@ -29,7 +29,7 @@ export async function getSiteClass(siteApi: string): Promise<ClassInfo[]> {
  */
 export async function doSearch(options: QueryOptions): Promise<VideoResource> {
     var queryUrl = getQueryUrl(options);
-    console.log("queryUrl:", queryUrl);
+    // console.log("queryUrl:", queryUrl);
     const xmlData = await fetchRss(queryUrl);
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
@@ -75,10 +75,10 @@ export async function doSearch(options: QueryOptions): Promise<VideoResource> {
 
     // 完整结果
     return {
-        page: list.getAttribute('page'),
-        pageCount: list.getAttribute('pagecount'),
-        pageSize: list.getAttribute('pagesize'),
-        recordCount: list.getAttribute('recordcount'),
+        page: Number(list.getAttribute('page')),
+        pageCount: Number(list.getAttribute('pagecount')),
+        pageSize: Number(list.getAttribute('pagesize')),
+        recordCount: Number(list.getAttribute('recordcount')),
         list: videoList
     };
 }

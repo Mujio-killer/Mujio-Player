@@ -63,10 +63,10 @@ export interface VideoInfo {
  * 查询结果
  */
 export interface VideoResource {
-    page: string,
-    pageCount: string,
-    pageSize: string,
-    recordCount: string
+    page: number,
+    pageCount: number,
+    pageSize: number,
+    recordCount: number
     list: VideoInfo[]
 }
 

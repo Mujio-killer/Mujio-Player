@@ -23,7 +23,9 @@
     "pinia": "^2.1.7",
     "vite": "^4.5.1",
     "vue": "^3.3.11",
+    "vue-hls-video-player": "^1.0.1",
     "vue-infinite-loading": "^2.4.5",
+    "vue-video-player": "^6.0.0",
     "vue-waterfall-easy": "^2.4.4",
     "vue-waterfall-plugin": "^3.3.1",
     "xml2js": "^0.6.2"

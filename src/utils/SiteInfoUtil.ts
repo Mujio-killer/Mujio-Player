@@ -15,13 +15,4 @@ export async function getSiteInfo(): Promise<Array<SiteInfo>> {
     }
 }
 
-// 根据站点ID，修改站点信息
-export async function updateSiteInfo(siteId: number, siteInfo: SiteInfo) {
-
-}
-
-// 根据站点ID，删除resource.json中对应的站点数据
-export async function deleteSiteInfo(siteId: number) {
-
-}
 

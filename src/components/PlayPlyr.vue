@@ -16,17 +16,15 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span style="color: #8798aa; float: right">【{{ appState.currentSrc.site.name }}】</span>
+      <!--      <span style="color: #8798aa; float: right">【{{ appState.currentSrc.site.name }}】</span>-->
     </div>
     <video id="videoPlayer"
            controls
+           :src="appState.currentSrc.episode.link"
+           type="auto"
+           muted
            preload="auto"
            poster="https://forthebadge.com/images/featured/featured-fuck-it-ship-it.svg">
-      <source :src="appState.currentSrc.episode.link" type="video/mp4"/>
-      <source :src="appState.currentSrc.episode.link" type="video/m3u8"/>
-      <source :src="appState.currentSrc.episode.link" type="video/ogg"/>
-      <source :src="appState.currentSrc.episode.link" type="application/x-mpegURL"/>
-
     </video>
   </div>
 
@@ -37,21 +35,21 @@ import {useAppStateStore} from "../stores";
 import {ArrowDownBold} from '@element-plus/icons-vue';
 
 const appState = useAppStateStore();
-
 // 切换剧集
 const onChange = (episode) => {
   appState.currentSrc.episode = episode;
   reLoadPlayer(); // 切换剧集时重新加载播放器
 };
 
-
-
 // 重新加载播放器
 const reLoadPlayer = () => {
   const videoPlayer = document.getElementById('videoPlayer') as HTMLVideoElement;
   videoPlayer.src = appState.currentSrc.episode.link;
-  videoPlayer.load(); // 重新加载视频
-  videoPlayer.play(); // 播放视频
+
+  setTimeout(() => {
+    videoPlayer.load(); // 重新加载视频
+    videoPlayer.play(); // 播放视频
+  }, 100); // 添加一个延迟，确保视频能够在重新加载后立即播放
 }
 </script>
 
