@@ -54,9 +54,6 @@ jobs:
         with:
           node-version: 19
 
-      - name: Install Pnpm
-      run: npm install -g pnpm
-
       # 安装 Rust
       - name: Install Rust stable
         uses: actions-rs/toolchain@v1
