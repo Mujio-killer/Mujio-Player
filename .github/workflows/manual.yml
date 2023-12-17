@@ -17,11 +17,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: 输出标签名称
+        run: echo "标签名称是 ${{ steps.get_version.outputs.Version }}"
+
       - name: Query version number
         id: get_version
         run: |
-          echo "using version tag ${GITHUB_REF}"
-          echo ::set-output name=Version::"${GITHUB_REF}"
+          echo "using version tag ${GITHUB_REF:6}"
+          echo ::set-output name=Version::"${GITHUB_REF:6}"
 
       - name: Create Release
         id: create-release
