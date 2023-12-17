@@ -3,7 +3,10 @@ name: test_release
 on:
 #  手动触发
   workflow_dispatch:
-
+  push:
+    # 匹配特定标签 (refs/tags)
+    tags:
+      - 'v*' # 推送事件匹配 v*, 例如 v1.0，v20.15.10 等来触发工作流
 # 具体任务
 jobs:
 #  任务名称
@@ -17,14 +20,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: 输出标签名称
-        run: echo "标签名称是 ${{ steps.get_version.outputs.Version }}"
-
       - name: Query version number
         id: get_version
         run: |
-          echo "using version tag ${GITHUB_REF:6}"
-          echo ::set-output name=Version::"${GITHUB_REF:6}"
+          echo "using version tag ${GITHUB_REF:10}"
+          echo ::set-output name=Version::"${GITHUB_REF:10}"
 
       - name: Create Release
         id: create-release
