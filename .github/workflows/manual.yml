@@ -1,14 +1,18 @@
-name: Release CI
-
+name: test_release
+# 触发条件
 on:
+#  手动触发
   workflow_dispatch:
 
+# 具体任务
 jobs:
+#  任务名称
   create-release:
     runs-on: ubuntu-latest
     outputs:
       RELEASE_UPLOAD_ID: ${{ steps.create-release.outputs.id }}
 
+    #任务步骤
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -16,8 +20,8 @@ jobs:
       - name: Query version number
         id: get_version
         run: |
-          echo "using version tag ${GITHUB_REF:10}"
-          echo ::set-output name=Version::"${GITHUB_REF:10}"
+          echo "using version tag ${GITHUB_REF}"
+          echo ::set-output name=Version::"${GITHUB_REF}"
 
       - name: Create Release
         id: create-release
