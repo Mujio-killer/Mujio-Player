@@ -28,7 +28,6 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "category": "player",
       "shortDescription": "a simple player write with tauri",
       "longDescription": "This is a video player write with Vue3 and rust;",
       "identifier": "com.tauri.test",
