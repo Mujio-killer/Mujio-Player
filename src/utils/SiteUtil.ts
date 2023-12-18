@@ -1,26 +1,16 @@
 import {fetchRss} from './CommonUtil';
-import {ClassInfo, Dd, Episode, QueryOptions, VideoInfo, VideoResource} from './types';
+import {Dd, Episode, QueryOptions, VideoInfo, VideoResource} from './types';
 
 /**
  * 读取网站分类、分页信息
  * @param siteApi
  */
-export async function getSiteClass(siteApi: string): Promise<ClassInfo[]> {
+export async function checkChannel(siteApi: string) {
     const xmlData: string = await fetchRss(siteApi);
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
 
-    const siteInfoData = xmlDoc.querySelector('rss') ? xmlDoc.querySelector('rss') : xmlDoc;
-
-    // console.log("siteInfoData", siteInfoData);
-    // 先解析分类信息
-    return Array.from(siteInfoData.querySelectorAll('ty'))
-        .map(item => {
-            return {
-                tid: item.getAttribute('id'),
-                name: item?.textContent ?? ''
-            }
-        });
+    return xmlDoc.querySelector('rss') ? true : false;
 }
 
 /**
@@ -105,10 +95,10 @@ function getQueryUrl(options: QueryOptions): string {
     if (options.wd) {
         url += `&wd=${options.wd}`;
     }
-/*
-    if (options.ct) {
-        url += `&ct=${options.ct}`;
-    }*/
+    /*
+        if (options.ct) {
+            url += `&ct=${options.ct}`;
+        }*/
 
 
     if (options.ids) {

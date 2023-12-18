@@ -14,7 +14,7 @@
         </KeepAlive>
 
         <!--        <History style="width: 100%; height: 100%" class="media-content media-content-history" v-if="needShow('3')"/>-->
-        <!--        <Setting class="media-content media-content-setting" v-if="needShow('4')"/>-->
+        <Setting class="media-content media-content-setting" v-if="needShow('4')"/>
       </el-main>
     </el-container>
   </div>
@@ -24,6 +24,7 @@
 import Aside from "./components/Aside.vue";
 import Explorer from "./components/Explorer.vue";
 import PlayPlyr from "./components/PlayPlyr.vue";
+import Setting from "./components/Setting.vue";
 import {useAppStateStore} from "./stores";
 
 

@@ -114,8 +114,8 @@ const queryOptions = ref(appState.queryOption);
 const searchResult = ref(appState.searchResult);
 
 onMounted(() => {
+  console.log('ALlsiteList:', appState.siteList)
   search();
-  console.log("mounted:", searchResult.value)
 });
 
 const search = () => {

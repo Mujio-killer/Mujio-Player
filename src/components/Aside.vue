@@ -21,17 +21,18 @@
             <Clock/>
           </el-icon>
         </el-menu-item>
+        -->
         <el-menu-item index="4">
           <el-icon size="25">
             <Setting/>
           </el-icon>
-        </el-menu-item>-->
+        </el-menu-item>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
 // import {Clock, Search, Setting, VideoPlay} from '@/**/element-plus/icons-vue'
-import {Search, VideoPlay} from '@element-plus/icons-vue'
+import {Search, VideoPlay, Setting} from '@element-plus/icons-vue'
 import {useAppStateStore} from "./../stores";
 
 const appState = useAppStateStore();
